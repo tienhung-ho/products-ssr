@@ -1,0 +1,33 @@
+
+mixin pagination(paginationObj)
+    nav
+        ul(class="pagination")
+            if (paginationObj.currPage > 1)
+                li(class="page-item" )
+                button(
+                    class="page-link"
+                    pagination-pos=paginationObj.currPage - 1
+                ) Previous Page
+            //- li(class=`page-item ${paginationObj.currPage == 1 ? "active": ""}`)
+            //-     button(
+            //-         class="page-link"
+            //-         pagination-pos=1
+            //-     ) 1
+            - for (let i = 1; i <= paginationObj.numberPage; i++) 
+                //- if (i != 1 && i != paginationObj.numberPage && paginationObj.currPage + 2 <= paginationObj.numberPage + 1)
+                li(class=`page-item ${paginationObj.currPage == i ? "active": ""}`)
+                    button(
+                    class="page-link"
+                    pagination-pos=i
+                    ) #{i}
+            //- li(class=`page-item ${paginationObj.currPage == paginationObj.numberPage ? "active": ""}`)
+            //-     button(
+            //-         class="page-link"
+            //-         pagination-pos=paginationObj.numberPage
+            //-     ) #{paginationObj.numberPage}  
+            if (paginationObj.currPage < paginationObj.numberPage)
+                li(class="page-item")
+                button(
+                    class="page-link"
+                    pagination-pos=paginationObj.currPage + 1
+                ) Next Page

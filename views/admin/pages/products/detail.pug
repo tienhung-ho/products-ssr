@@ -1,0 +1,62 @@
+extends ../../layout/layout.pug
+include ../../mixins/show-alert.pug
+
+block main 
+
+  +alert-error(5000)
+
+
+  if (product.title)
+    h1(class="mb-4") #{product.title}
+  hr
+
+  //- if (product.featured)
+  //-   div(class="mb-4")
+  //-     span Feature:
+  //-     if (product.status === "1")
+  //-       span(
+  //-         class="badge badge-success"
+  //-         style='margin-left: 10px'
+  //-       ) Yes
+  //-     else
+  //-       span(
+  //-         class="badge badge-danger"
+  //-         style='margin-left: 10px'
+  //-       ) No
+
+  if (product.price)
+    div(class="mb-4") Giá: <b>#{product.price}$</b>
+
+  if (product.discountPercentage)
+    div(class="mb-4") % Giảm giá: <b>#{product.discountPercentage}%</b>
+
+  if (product.stock)
+    div(class="mb-4") Số lượng: <b>#{product.stock}</b>
+
+  if (product.thumbnail)
+    div(class="mb-4")
+      div Hình ảnh:
+      img(
+        src=product.thumbnail
+        style="width: 100px"
+      )
+
+  if (product.status)
+    div(class="mb-4")
+      span Trang thái:
+      if (product.status === "active")
+        span(
+          class="badge bg-success"
+          style='margin-left: 10px'
+          ) Active
+      else
+        span(
+          class="badge bg-danger"
+          style='margin-left: 10px'
+        ) Inactive
+
+  if (product.position)
+    div(class="mb-4") Vị trí: <b>#{product.position}</b>
+
+  if (product.description)
+    div(class="mb-4") Mô tả: #{product.description}

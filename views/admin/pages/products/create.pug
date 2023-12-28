@@ -1,0 +1,135 @@
+extends ../../layout/layout.pug
+include ../../mixins/show-alert.pug
+
+block main
+
+  +alert-error(5000)
+
+  h1(class="mb-4") Tạo mới sản phẩm
+  form(
+    action=`/${prefixAdmin}/products/create`
+    id="form-create-product"
+    enctype="multipart/form-data"
+    method='POST'
+  )
+    .form-group
+      label(
+        for='title'
+      ) Tiêu đề
+      input(
+        type='text'
+        class='form-control'
+        id='title'
+        name='title'
+        require
+      )
+    .form-group
+      label(
+        for=`description`
+      ) Mô tả
+      textarea(
+        class='form-control'
+        id='description'
+        name='description'
+        rows='5'
+      )
+
+    .form-group
+      label(
+        for=`price`
+      ) Giá
+      input(
+        type='number'
+        class='form-control'
+        id='price'
+        name='price'
+        value=0
+      )
+
+    .form-group
+      label(
+        for=`discountPercentage`
+      ) Giảm giá(%)
+      input(
+        type='number'
+        class='form-control'
+        id='discountPercentage'
+        name='discountPercentage'
+        min='0'
+        value=0
+      )
+
+    .form-group
+      label(
+        for=`stock`
+      ) Số lượng
+      input(
+        type='number'
+        class='form-control'
+        id='stock'
+        name='stock'
+        value=0
+      )
+      
+    div(
+      class='form-group'
+      upload-image
+    )
+      label(
+        for=`thumbnail`
+      ) Đường dẫn ảnh
+      input(
+        type='file'
+        class='form-control-file'
+        id='thumbnail'
+        name='thumbnail'
+        accept='image/*'
+        upload-image-input
+      )
+      img(
+        class='image-preview'
+        upload-image-preview
+      )
+
+    .form-group
+      label(
+        for=`position`
+      ) Vị trí
+      input(
+        type='number'
+        class='form-control'
+        id='position'
+        name='position'
+        placeholder='Tự động tăng!' 
+      )
+
+    .form-group.form-check.form-check-inline
+      input(
+        type='radio'
+        id='statusActive'
+        value='active'
+        name='status'
+        checked
+      )
+      label(
+        for='statusActive'
+        class='form-check-lable'
+      ) Hoạt động
+
+    .form-group.form-check.form-check-inline
+      input(
+        type='radio'
+        id='statusInactive'
+        value='inactive'
+        name='status'
+      )
+      label(
+        for='statusInactive'
+        class='form-check-lable'
+      ) Dừng hoạt động
+
+    .form-group 
+      button(
+        type='submit'
+        class='btn btn-primary'
+      ) Tạo mới

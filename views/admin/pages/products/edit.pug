@@ -1,0 +1,163 @@
+extends ../../layout/layout.pug
+include ../../mixins/show-alert.pug
+
+block main
+
+  +alert-success(5000)
+
+  h1(class="mb-4") Tạo mới sản phẩm
+  form(
+    action=`/${prefixAdmin}/products/edit/${product.id}?_method=PATCH`
+    id="form-create-product"
+    enctype="multipart/form-data"
+    method='POST'
+  )
+    .form-group
+      label(
+        for='title'
+      ) Tiêu đề
+      input(
+        type='text'
+        class='form-control'
+        id='title'
+        name='title'
+        value=product.title
+        require
+      )
+    .form-group
+      label(
+        for=`description`
+      ) Mô tả
+      textarea(
+        class='form-control'
+        id='description'
+        name='description'
+        rows='5'
+      ) #{product.description}
+
+    .form-group
+      label(
+        for=`price`
+      ) Giá
+      input(
+        type='text'
+        class='form-control'
+        id='price'
+        name='price'
+        value=product.price
+      )
+
+    .form-group
+      label(
+        for=`discountPercentage`
+      ) Giảm giá(%)
+      input(
+        type='text'
+        class='form-control'
+        id='discountPercentage'
+        name='discountPercentage'
+        min='0'
+        value=product.discountPercentage
+      )
+
+    .form-group
+      label(
+        for=`stock`
+      ) Số lượng
+      input(
+        type='text'
+        class='form-control'
+        id='stock'
+        name='stock'
+        value=product.stock
+      )
+      
+    div(
+      class='form-group'
+      upload-image
+    )
+      label(
+        for=`thumbnail`
+      ) Đường dẫn ảnh
+      input(
+        type='file'
+        class='form-control-file'
+        id='thumbnail'
+        name='thumbnail'
+        accept='image/*'
+        upload-image-input
+      )
+      img(
+        src=product.thumbnail
+        class='image-preview'
+        upload-image-preview
+      )
+
+    .form-group
+      label(
+        for=`position`
+      ) Vị trí
+      input(
+        type='text'
+        class='form-control'
+        id='position'
+        name='position'
+        placeholder='Tự động tăng!' 
+        value=product.position
+      )
+
+    .form-group.form-check.form-check-inline
+      input(
+        type='radio'
+        id='statusActive'
+        value='active'
+        name='status'
+        checked=(product.status === 'active' ? true : false)
+      )
+      label(
+        for='statusActive'
+        class='form-check-lable'
+      ) Hoạt động
+      
+      //- button( 
+      //-   type="button" 
+      //-   class="btn btn-outline-success"
+      //-   id='statusInactive'
+      //-   value='inactive'
+      //-   name='status'
+      //-   style={
+      //-     background: product.status === 'active' ? 'green' : '',
+      //-     color: product.status === 'active' ? 'white' : 'green'
+      //-   }
+      //- ) Hoạt động
+
+    .form-group.form-check.form-check-inline
+      input(
+        type='radio'
+        id='statusInactive'
+        value='inactive'
+        name='status'
+        checked=(product.status === 'inactive' ? true : false)
+      )
+      label(
+        for='statusInactive'
+        class='form-check-lable'
+      ) Dừng hoạt động
+
+      //- button( 
+      //-   type="button" 
+      //-   class="btn btn-outline-danger"
+      //-   id='statusInactive'
+      //-   value='inactive'
+      //-   name='status'
+      //-   style={
+      //-     background: product.status === 'inactive' ? 'red' : '',
+      //-     color: product.status === 'inactive' ? 'white' : 'red'
+      //-   }
+      //- ) Dừng hoạt động
+
+    .form-group 
+      button(
+        type='submit'
+        class='btn btn-primary'
+      ) Cập nhật
